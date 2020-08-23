@@ -1,14 +1,26 @@
 {
+    "name": "seosazi/php-html-parser",
+    "type": "library",
+    "description": "simple crawl link and parser it",
+    "keywords": ["html", "php", "parser", "crawler"],
+    "homepage": "https://github.com/seosazi",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pouya Pormohamad",
+            "email": "p.pormohamad@gmail.com",
+            "homepage": "https://github.com/seosazi/php-html-parser"
+        }
+    ],
     "require": {
+        "php": ">=5.5.0",
         "guzzlehttp/guzzle": "~6.0",
         "danielstjules/stringy": "~3.0.1",
-        "voku/simple_html_dom": "^4.7",
-        "symfony/var-dumper": "*"
+        "voku/simple_html_dom": "^4.7"
     },
-
     "autoload": {
         "psr-4": {
             "PHPHtmlParser\\": "src/PHPHtmlParser"
         }
-    }
+    },
 }
