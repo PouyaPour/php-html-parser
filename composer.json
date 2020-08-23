@@ -22,5 +22,10 @@
         "psr-4": {
             "PHPHtmlParser\\": "src/PHPHtmlParser"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.8.x-dev"
+        }
     }
 }
