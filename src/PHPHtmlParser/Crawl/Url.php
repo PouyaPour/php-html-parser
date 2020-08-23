@@ -10,7 +10,7 @@ namespace PHPHtmlParser\Crawl;
 
 
 use Exception;
-use PHPHtmlParser\Utility\NeedsTools;
+use PHPHtmlParser\Utility\Tools;
 
 class Url
 {
@@ -96,7 +96,7 @@ class Url
     public static function createUrlInfoWithUrl(string $url)
     {
         $result=array();
-        $result['homeAddress'] = NeedsTools::getHostName($url);
+        $result['homeAddress'] = Tools::getHostName($url);
         $result['url'] = $url;
         $result['parent'] = $url;
         $result['anchorText'] = 'home';
@@ -518,10 +518,10 @@ class Url
         if($ContentType) {
             $ContentType = $headers["Content-Type"];
             if (is_array($ContentType)) {
-                if (NeedsTools::countSubStr($ContentType[0], 'text/html')===0)
+                if (Tools::countSubStr($ContentType[0], 'text/html')===0)
                     return false;
             } else {
-                if (NeedsTools::countSubStr($headers["Content-Type"], 'text/html')===0)
+                if (Tools::countSubStr($headers["Content-Type"], 'text/html')===0)
                     return false;
             }
             return true;

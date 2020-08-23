@@ -13,7 +13,7 @@ use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Cookie\SetCookie;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\TransferStats;
-use PHPHtmlParser\Utility\NeedsTools;
+use PHPHtmlParser\Utility\Tools;
 use Psr\Http\Message\RequestInterface;
 use Zend\Json\Exception\RecursionException;
 
@@ -40,7 +40,7 @@ class UrlLoader
                     'Accept-Language' => 'en-US,en;q=0.5',
                     'Connection'	 => 'keep-alive',
                     'Upgrade-Insecure-Requests' => 1,
-                    'Host' => NeedsTools::getHostName($url),
+                    'Host' => Tools::getHostName($url),
                     'cookie' => true,
                     'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0',
                     'Cache-Control' => 'no-cache'

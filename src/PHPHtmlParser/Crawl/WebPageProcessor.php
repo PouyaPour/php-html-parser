@@ -38,7 +38,7 @@ class WebPageProcessor
      * @return mixed
      * @throws \Exception
      */
-    public static function getAllUrlInAddress(Url $urlInfo)
+    private static function getAllUrlInAddress(Url $urlInfo)
     {
         if($urlInfo->isCorrectForCrawl()) {
             $data = NULL;
@@ -60,7 +60,7 @@ class WebPageProcessor
      * @throws \Exception
      * @throws GuzzleException
      */
-    public function pageHtmlDomParser($urlInfo)
+    private function pageHtmlDomParser($urlInfo)
     {
         $urlClass = Url::createUrlInfoWithUrl($urlInfo);
         if($this->getClintCrawler()) {
@@ -85,7 +85,7 @@ class WebPageProcessor
      * @return HtmlParser
      * @throws \Exception
      */
-    public function zeroPageDomParser(Url $urlInfo)
+    private function zeroPageDomParser(Url $urlInfo)
     {
         $html='<html></html>';
         $status=800;
@@ -116,7 +116,7 @@ class WebPageProcessor
      * @return array
      * @throws \Exception
      */
-    public static function createZeroPage(Url $urlInfo)
+    private static function createZeroPage(Url $urlInfo)
     {
         $data=NULL;
         if($urlInfo->isUrlExternalLink()){
