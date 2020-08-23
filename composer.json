@@ -1,6 +1,7 @@
 {
     "name": "seosazi/php-html-parser",
     "type": "library",
+    "version": "1.0.0",
     "description": "simple crawl link and parser it",
     "keywords": ["html", "php", "parser", "crawler"],
     "homepage": "https://github.com/seosazi",
@@ -21,11 +22,6 @@
     "autoload": {
         "psr-4": {
             "PHPHtmlParser\\": "src/PHPHtmlParser"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0.2"
         }
     }
 }
