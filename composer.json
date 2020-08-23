@@ -1,0 +1,14 @@
+{
+    "require": {
+        "guzzlehttp/guzzle": "~6.0",
+        "danielstjules/stringy": "~3.0.1",
+        "voku/simple_html_dom": "^4.7",
+        "symfony/var-dumper": "*"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "PHPHtmlParser\\": "src/PHPHtmlParser"
+        }
+    }
+}
