@@ -1,7 +1,7 @@
 {
     "name": "seosazi/php-html-parser",
     "type": "library",
-    "version": "v1.1.0",
+    "version": "v1.1.1",
     "description": "simple crawl link and parser it",
     "keywords": ["html", "php", "parser", "crawler"],
     "homepage": "https://github.com/seosazi",
