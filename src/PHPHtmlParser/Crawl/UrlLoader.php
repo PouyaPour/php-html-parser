@@ -154,7 +154,7 @@ class UrlLoader
             $data['headers'] = $crawler->getHeaders();
             $data['redirect'] = $redirect;
             $html = '<html></html>';
-            if (Url::isPageUrl($data['headers'])) {
+            if (Url::isHtmlPage($data['headers'])) {
                 $html = $crawler->getBody()->getContents();
             }
             if (empty($html))

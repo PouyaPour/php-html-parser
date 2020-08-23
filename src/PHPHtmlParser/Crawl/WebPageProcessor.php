@@ -12,6 +12,7 @@ namespace PHPHtmlParser\Crawl;
 
 use GuzzleHttp\Exception\GuzzleException;
 use PHPHtmlParser\Parser\HtmlParser;
+use PHPHtmlParser\Parser\PageFeatures;
 
 class WebPageProcessor
 {
@@ -99,7 +100,7 @@ class WebPageProcessor
 
     /**
      * @param $urlInfo
-     * @return array
+     * @return PageFeatures
      * @throws Exception
      * @throws GuzzleException
      */

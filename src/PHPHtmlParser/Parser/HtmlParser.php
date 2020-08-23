@@ -570,13 +570,14 @@ class HtmlParser
     }
 
     /**
-     * @return array
+     * @return PageFeatures
      * @throws \Exception
      */
     public function getData()
     {
         $this->getAttributeHtml();
-        return $this->data;
+        return PageFeatures::create($this->data);
+//        return $this->data;
         #return new ProcessedPage($this->data);
     }
 

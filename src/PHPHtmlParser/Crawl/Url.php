@@ -512,7 +512,7 @@ class Url
         return substr($headers[0], 9, 3);
     }
 
-    public static function isPageUrl($headers)
+    public static function isHtmlPage($headers)
     {
         $ContentType = self::ContentTypePage($headers);
         if($ContentType) {
@@ -566,7 +566,7 @@ class Url
         $headers=$this->getHeaders();
         #var_dump($headers);
         //check link is webPage not link css, image, ...
-        if(!self::isPageUrl($headers))
+        if(!self::isHtmlPage($headers))
             return false;
         /*if($this->HttpResponseCode($headers)!==200)
             return false;*/
