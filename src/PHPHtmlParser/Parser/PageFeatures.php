@@ -13,6 +13,7 @@ use Exception;
 use PHPHtmlParser\Crawl\Url;
 use Seosazi\Tools\PageReference;
 
+
 class PageFeatures
 {
     private $title;
@@ -42,6 +43,8 @@ class PageFeatures
     private $innerLinks;
     /** @var array */
     private $links;
+    private $urlBeforeRedirect;
+    private $redirect;
 
 
     /**
@@ -52,15 +55,20 @@ class PageFeatures
     public static function create(array $attribute)
     {
         $processPage = new PageFeatures();
+        $processPage->setUrl($attribute['url']);
+        $processPage->setParent($attribute['parent']);
+        $processPage->setStatus($attribute['status']);
+        $processPage->setHeader($attribute['headers']);
+        $processPage->setUrlBeforeRedirect($attribute['urlBeforeRedirect']);
+        $processPage->setRedirect($attribute['redirect']);
         $processPage->setTitle($attribute['title']);
         $processPage->setH1Tag($attribute['H1']);
         $processPage->setDescription($attribute['description']);
-        $processPage->setHeader($attribute['headers']);
-        $processPage->setStatus($attribute['status']);
         $processPage->setHtml($attribute['html']);
+        $processPage->setDepth($attribute['depth']);
         $processPage->setImageAlt($attribute['ImageAttribute']);
         $processPage->setUrlInfo($attribute['urlInfo']);
-        $processPage->setParent($attribute['parent']);
+
         $processPage->setCanonical($attribute['canonical']);
         $processPage->setBodyText($attribute['body']);
         $processPage->setLinks($attribute['links']);
@@ -89,8 +97,7 @@ class PageFeatures
     {
         if($title === null){
             $this->title = false;
-        }
-        if (is_array($title)) {
+        }elseif (is_array($title)) {
             if (empty($title)) {
                 $this->title = false;
             }elseif (!is_string($title[0]) AND !empty($title[0])) {
@@ -101,8 +108,9 @@ class PageFeatures
         }else {
             if (!is_string($title) AND !empty($title) ) {
                 $this->title = false;
+            }else {
+                $this->title = $title;
             }
-            $this->title = $title;
         }
     }
 
@@ -114,8 +122,7 @@ class PageFeatures
     {
         if($canonical === null){
             $canonical = false;
-        }
-        if (is_array($canonical)) {
+        }elseif (is_array($canonical)) {
             if (empty($canonical)) {
                 $this->canonical = false;
             }else {
@@ -156,8 +163,7 @@ class PageFeatures
     {
         if($description === null){
             $this->description = false;
-        }
-        if (is_array($description)) {
+        }elseif (is_array($description)) {
             if (empty($description)) {
                 $this->description = '';
             }elseif (!is_string($description[0]) AND !empty($description[0])) {
@@ -168,8 +174,9 @@ class PageFeatures
         }else {
             if (!is_string($description) AND !empty($description)) {
                 $this->description = false;
+            }else {
+                $this->description = $description;
             }
-            $this->description = $description;
         }
     }
 
@@ -193,11 +200,11 @@ class PageFeatures
     {
         if($url === null){
             throw new Exception('Url selected is NULL.');
-        }
-        if(!is_string($url)){
+        }elseif(!is_string($url)){
             throw new Exception('Url selected is not string.');
+        }else {
+            $this->url = $url;
         }
-        $this->url = $url;
     }
 
     /**
@@ -220,11 +227,11 @@ class PageFeatures
     {
         if($status === null){
             $this->status = false;
-        }
-        if(!is_int($status)){
+        }elseif(!is_int($status)){
             $this->status = false;
+        }else {
+            $this->status = $status;
         }
-        $this->status = $status;
     }
 
     /**
@@ -247,8 +254,9 @@ class PageFeatures
     {
         if($header === null){
             $this->header = false;
+        }else {
+            $this->header = $header;
         }
-        $this->header = $header;
     }
 
     /**
@@ -279,11 +287,11 @@ class PageFeatures
     {
         if($urlInfo === null){
             $this->urlInfo = false;
-        }
-        if(!is_array($urlInfo)){
+        }elseif(!is_array($urlInfo)){
             $this->urlInfo = false;
+        }else{
+            $this->urlInfo = new Url($urlInfo);
         }
-        $this->urlInfo = new Url($urlInfo);
     }
 
     /**
@@ -315,11 +323,11 @@ class PageFeatures
     {
         if($depth === null){
             $this->depth = false;
-        }
-        if(!is_int($depth)) {
+        }elseif(!is_int($depth)) {
             $this->depth = false;
+        }else {
+            $this->depth = $depth;
         }
-        $this->depth = $depth;
     }
 
     /**
@@ -353,8 +361,7 @@ class PageFeatures
     {
         if($bodyText === null){
             $this->bodyText = false;
-        }
-        if (is_array($bodyText)) {
+        }elseif (is_array($bodyText)) {
             if (empty($bodyText)) {
                 $this->bodyText =false;
             }elseif (!is_string($bodyText[0]) AND !empty($bodyText[0])) {
@@ -365,8 +372,9 @@ class PageFeatures
         }else {
             if (!is_string($bodyText) AND !empty($bodyText)) {
                 $this->bodyText = false;
+            }else {
+                $this->bodyText = $bodyText;
             }
-            $this->bodyText = $bodyText;
         }
     }
 
@@ -480,6 +488,55 @@ class PageFeatures
             $this->links = [];
         }else {
             $this->links = $links;
+        }
+    }
+
+    public function setUrlBeforeRedirect($urlBeforeRedirect)
+    {
+        if($urlBeforeRedirect === null){
+            $this->urlBeforeRedirect = false;
+        }elseif(is_array($urlBeforeRedirect)) {
+            if (empty($urlBeforeRedirect)) {
+                $this->urlBeforeRedirect =false;
+            }elseif (!is_string($urlBeforeRedirect[0]) AND !empty($urlBeforeRedirect[0])) {
+                $this->urlBeforeRedirect = false;
+            }else {
+                $this->urlBeforeRedirect = $urlBeforeRedirect[0];
+            }
+        }else {
+            if (!is_string($urlBeforeRedirect) AND !empty($urlBeforeRedirect)) {
+                $this->urlBeforeRedirect = false;
+            }else {
+                $this->urlBeforeRedirect = $urlBeforeRedirect;
+            }
+        }
+    }
+
+
+    public function getUrlBeforeRedirect()
+    {
+        return $this->urlBeforeRedirect;
+    }
+
+
+    public function getRedirect()
+    {
+        return $this->redirect;
+    }
+
+
+    public function setRedirect($redirect)
+    {
+        if($redirect === null){
+            $this->redirect = false;
+        }elseif(is_array($redirect)) {
+            if (empty($redirect)) {
+                $this->redirect =false;
+            }else {
+                $this->redirect = $redirect;
+            }
+        }else {
+            $this->redirect = $redirect;
         }
     }
 }
