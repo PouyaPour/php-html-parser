@@ -1,4 +1,4 @@
-# Fast and Convenient PHP Page Parser
+# Fast and Convenient PHP WebPage and Html Parser
 PHPHtmlParser is a fast, convenient, and simple page parser which allows you to use any data of page, such as header, redirects, code status, variant meta tag, H tags, image attributes, links and so on. The goal is to assist you that parse different pages without any problem and use categorized data in your programs.
 
 Let's get started ...         
@@ -23,6 +23,8 @@ or
 
 Using this class is simple and it is enough to put your page address to get different information of it. The following example is a very simplistic usage of the package.
 ```php
+// Assuming you installed from Composer:
+use PHPHtmlParser\Crawl\WebPageProcessor;
 require_once '/vendor/autoload.php';
 $data = WebPageProcessor::onePageProcessed('https://www.your-website.com');
 var_dump($data->getH1Tag());
