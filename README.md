@@ -3,7 +3,8 @@ PHPHtmlParser is a fast, convenient, and simple page parser which allows you to 
 
 Let's get started ...         
 
-##Installing PHP Html Parser
+## Installing PHP Html Parser
+
 This package can be found on packagist and is best loaded using composer. We support php 5.0, 7.0.
 The recommended way to install Guzzle is through [Composer](https://getcomposer.org/).
 
@@ -18,9 +19,10 @@ or
  composer require seosazi/php-html-parser
 ```
 
-##Usage
+## Usage
+
 Using this class is simple and it is enough to put your page address to get different information of it. The following example is a very simplistic usage of the package.
-```
+```php
 require_once '/vendor/autoload.php';
 $data = WebPageProcessor::onePageProcessed('https://www.your-website.com');
 var_dump($data->getH1Tag());
