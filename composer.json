@@ -2,7 +2,7 @@
     "name": "seosazi/php-html-parser",
     "type": "library",
     "description": "simple crawl link and parser it",
-    "keywords": ["html", "php", "parser", "crawler"],
+    "keywords": ["html", "php", "parser", "crawler", "web page"],
     "homepage": "https://github.com/seosazi",
     "license": "MIT",
     "authors": [
