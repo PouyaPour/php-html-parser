@@ -61,9 +61,23 @@ var_dump($data->getHeader());//get array of header parameters
 | getLiElement | Get an array of all Li element | 
 | getImageAlt | Get an array of all image address with alt tag | 
 | getAnchorTag | Get an array of all anchor text | 
-| getLinks | Get an array of all links. for better use of link, the Url class was created for easy use with the url. more information | 
+| getLinks | Get an array of all links. for better use of link, the [Url](#url-class) class was created for easy use with the url. more information | 
 | getInternalLinks | Get an array of all internal links. for better use of link, the Url class was created for easy use with the url. more information | 
 | getExternalLinks | Get an array of all external links. for better use of link, the Url class was created for easy use with the url. more information |
-| getEntireData | Get an array of all data 
+| getEntireData | Get an array of all data |
+
+## Url Class
+We created the Url class to increase the quality and speed of using URLs. You can use this very simple.
+```php
+$data->getUrlInfo()->getUrl();
+// if anchor text exists
+$data->getUrlInfo()->getAnchorText();
+$data->getUrlInfo()->getFabricUrl();
+$data->getUrlInfo()->getHomeAddress();
+// if parent exists
+$data->getUrlInfo()->getParent();
+//get all information in array
+$data->getUrlInfo()->getUrlInfoArray();
+```
 
 

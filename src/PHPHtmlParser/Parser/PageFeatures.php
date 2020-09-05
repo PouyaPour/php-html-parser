@@ -293,7 +293,7 @@ class PageFeatures
     }
 
     /**
-     * @return mixed
+     * @return Url
      * @throws Exception
      */
     public function getUrlInfo()
