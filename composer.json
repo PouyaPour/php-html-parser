@@ -22,5 +22,8 @@
         "psr-4": {
             "PHPHtmlParser\\": "src/PHPHtmlParser"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "9.2"
     }
 }

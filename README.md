@@ -36,7 +36,7 @@ var_dump($data->getHeader());//get array of header parameters
 ## Full list of WebPageProcessor parameters
 | Parameter | Description |
 | ------ | ------ |
-| getUrlInfo | Get information about your information, for example home address, last url after possible redirects and first url |
+| getUrlInfo | Get information about your [Url](#url-class), for example home address, last url after possible redirects and first url |
 | getHtml | Get page html |
 | getUrl | Get the url that you entered |
 | getStatus | Get the status code of your address, if the code is more than 600 it means that this address is inaccessible |
@@ -62,8 +62,8 @@ var_dump($data->getHeader());//get array of header parameters
 | getImageAlt | Get an array of all image address with alt tag | 
 | getAnchorTag | Get an array of all anchor text | 
 | getLinks | Get an array of all links. for better use of link, the [Url](#url-class) class was created for easy use with the url. more information | 
-| getInternalLinks | Get an array of all internal links. for better use of link, the Url class was created for easy use with the url. more information | 
-| getExternalLinks | Get an array of all external links. for better use of link, the Url class was created for easy use with the url. more information |
+| getInternalLinks | Get an array of all internal links. for better use of link, the [Url](#url-class) class was created for easy use with the url. more information | 
+| getExternalLinks | Get an array of all external links. for better use of link, the [Url](#url-class) class was created for easy use with the url. more information |
 | getEntireData | Get an array of all data |
 
 ## Url Class
