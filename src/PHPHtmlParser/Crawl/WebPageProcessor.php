@@ -71,10 +71,9 @@ class WebPageProcessor
             $headers = $http_url_info['headers'];
             $text = $http_url_info['text'];
             $furtherInformation = $http_url_info['furtherInformation'];
-            $size = $http_url_info['size'];
             $redirect = $http_url_info['redirect'];
             return new HtmlParser($html, $status, $headers, $text,
-                $furtherInformation, $urlClass, $size, null, $redirect);
+                $furtherInformation, $urlClass, null, $redirect);
         }else{
             return $this->zeroPageDomParser($urlClass);
         }
@@ -93,8 +92,7 @@ class WebPageProcessor
         $headers=array();
         $text='';
         $furtherInformation=array();
-        $size = 0;
-        return new HtmlParser($html, $status, $headers, $text, $furtherInformation, $urlInfo, $size,null, []);
+        return new HtmlParser($html, $status, $headers, $text, $furtherInformation, $urlInfo,null, []);
     }
 
 

@@ -42,14 +42,13 @@ class HtmlParser
      * @param string $text
      * @param array $furtherInformation
      * @param Url $urlInfo
-     * @param int $size
      * @param bool $crawlDuplicates
      * @param array $redirect
      * @throws \Exception
      */
     public function __construct(string $html, int $status, array $headers, string $text,
                                 array $furtherInformation, Url $urlInfo,
-                                int $size, $crawlDuplicates=false, array $redirect)
+                                $crawlDuplicates=false, array $redirect)
     {
         $this->urlBeforeRedirect = $urlInfo->getUrl();
         $counter = count($redirect);
@@ -268,7 +267,6 @@ class HtmlParser
                 #$value = $this->checkUrl($value);
                 $value = Url::completeEditUrl($value, $this->url, $this->baseTag);
                 if($value) {
-                    $text = $e->getAttribute('alt');
                     $text = $e->plaintext;
                     $url = Url::createUrlInfo($this->homeAddress, $value, $this->url, $text, $realUrl, ($this->depth + 1));
                     if ($url->isUrlExternalLink()) {
@@ -378,16 +376,15 @@ class HtmlParser
         $href = html_entity_decode($href);
         $originalHref = $href;
         if (0 !== strpos($href, 'http')) {
-            if(is_array(parse_url($href))) {
-                if (array_key_exists('path', parse_url($href))) {
-                    $href = parse_url($href)['path'];
-                    if(is_array(parse_url($originalHref))) {
-                        if (array_key_exists('query', parse_url($originalHref))) {
-                            $href .= '?' . parse_url($originalHref)['query'];
-                        }
-                    }
+            if (array_key_exists('path', parse_url($href))) {
+                $href = parse_url($href)['path'];
+               
+                if (array_key_exists('query', parse_url($originalHref))) {
+                    $href .= '?' . parse_url($originalHref)['query'];
                 }
+
             }
+
             #$path = '/' . ltrim($href, '/');
             $path = '/' . $href;
             if (extension_loaded('http')) {

@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/seosazi/php-html-parser.svg?branch=master)](https://travis-ci.com/seosazi/php-html-parser)
+
 # Fast and Convenient PHP WebPage and Html Parser
 PHPHtmlParser is a fast, convenient, and simple page parser which allows you to use any data of page, such as header, redirects, code status, variant meta tag, H tags, image attributes, links and so on. The goal is to assist you that parse different pages without any problem and use categorized data in your programs.
 

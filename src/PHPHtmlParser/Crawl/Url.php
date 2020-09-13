@@ -38,9 +38,6 @@ class Url
      */
     public function __construct(array $urlInfo)
     {
-        if(!is_array($urlInfo)){
-            throw new Exception('Input constructor urlInfo class must be array');
-        }
         if(array_key_exists('homeAddress', $urlInfo))
             $this->setHomeAddress($urlInfo['homeAddress']);
         if(array_key_exists('url', $urlInfo))
@@ -129,22 +126,21 @@ class Url
     public static function correctUrl(string $url)
     {
         $url_parser=parse_url($url);
-        if(is_array($url_parser)) {
-            if(array_key_exists('scheme', $url_parser) && array_key_exists('host', $url_parser)) {
-                if (array_key_exists('path', $url_parser) && array_key_exists('query', $url_parser)) {
-                    $url_end = $url_parser['scheme'] . '://' . $url_parser['host'] . $url_parser['path'] . '?' . $url_parser['query'];
-                } elseif (array_key_exists('path', $url_parser)) {
-                    $url_end = $url_parser['scheme'] . '://' . $url_parser['host'] . $url_parser['path'];
-                } elseif (array_key_exists('query', $url_parser)) {
-                    $url_end = $url_parser['scheme'] . '://' . $url_parser['host'] . '?' . $url_parser['query'];
-                } else {
-                    $url_end = $url_parser['scheme'] . '://' . $url_parser['host'];
-                }
-                #$url_end = rtrim($url_end, "/");
-                $url_end = Url::convertToUTF8($url_end);
-                return $url_end;
+        if(array_key_exists('scheme', $url_parser) && array_key_exists('host', $url_parser)) {
+            if (array_key_exists('path', $url_parser) && array_key_exists('query', $url_parser)) {
+                $url_end = $url_parser['scheme'] . '://' . $url_parser['host'] . $url_parser['path'] . '?' . $url_parser['query'];
+            } elseif (array_key_exists('path', $url_parser)) {
+                $url_end = $url_parser['scheme'] . '://' . $url_parser['host'] . $url_parser['path'];
+            } elseif (array_key_exists('query', $url_parser)) {
+                $url_end = $url_parser['scheme'] . '://' . $url_parser['host'] . '?' . $url_parser['query'];
+            } else {
+                $url_end = $url_parser['scheme'] . '://' . $url_parser['host'];
             }
+            #$url_end = rtrim($url_end, "/");
+            $url_end = Url::convertToUTF8($url_end);
+            return $url_end;
         }
+
         $url_end = Url::convertToUTF8($url);
         return $url_end;
 
@@ -182,27 +178,26 @@ class Url
     {
         $url = '';
         $url_parser=parse_url($lastUrl);
-        if(is_array($url_parser)) {
-            if (array_key_exists('scheme', $url_parser) && array_key_exists('host', $url_parser)) {
-                if (array_key_exists('path', $url_parser) && array_key_exists('query', $url_parser)) {
-                    $url = $url_parser['scheme'] . '://' . $url_parser['host'] . $url_parser['path'] . '?' . $url_parser['query'];
-                } elseif (array_key_exists('path', $url_parser)) {
-                    $url = $url_parser['scheme'] . '://' . $url_parser['host'] . $url_parser['path'];
-                } elseif (array_key_exists('query', $url_parser)) {
-                    $url = $url_parser['scheme'] . '://' . $url_parser['host'] . '?' . $url_parser['query'];
-                } else {
-                    $url = $url_parser['scheme'] . '://' . $url_parser['host'];
-                }
-            }else{
-                if (array_key_exists('path', $url_parser) && array_key_exists('query', $url_parser)) {
-                    $url = $url_parser['path'] . '?' . $url_parser['query'];
-                } elseif (array_key_exists('path', $url_parser)) {
-                    $url = $url_parser['path'];
-                } elseif (array_key_exists('query', $url_parser)) {
-                    $url = '?' . $url_parser['query'];
-                }
+        if (array_key_exists('scheme', $url_parser) && array_key_exists('host', $url_parser)) {
+            if (array_key_exists('path', $url_parser) && array_key_exists('query', $url_parser)) {
+                $url = $url_parser['scheme'] . '://' . $url_parser['host'] . $url_parser['path'] . '?' . $url_parser['query'];
+            } elseif (array_key_exists('path', $url_parser)) {
+                $url = $url_parser['scheme'] . '://' . $url_parser['host'] . $url_parser['path'];
+            } elseif (array_key_exists('query', $url_parser)) {
+                $url = $url_parser['scheme'] . '://' . $url_parser['host'] . '?' . $url_parser['query'];
+            } else {
+                $url = $url_parser['scheme'] . '://' . $url_parser['host'];
+            }
+        }else{
+            if (array_key_exists('path', $url_parser) && array_key_exists('query', $url_parser)) {
+                $url = $url_parser['path'] . '?' . $url_parser['query'];
+            } elseif (array_key_exists('path', $url_parser)) {
+                $url = $url_parser['path'];
+            } elseif (array_key_exists('query', $url_parser)) {
+                $url = '?' . $url_parser['query'];
             }
         }
+
         $url = Url::convertToUTF8($url);
         return $url;
     }
@@ -254,8 +249,6 @@ class Url
      */
     public function getFabricUrl()
     {
-        if(!is_string($this->fabricUrl))
-            throw new Exception('real url must be string');
         return $this->fabricUrl;
     }
 
@@ -336,12 +329,6 @@ class Url
      */
     public function setParent(string $parent)
     {
-        if(empty($parent)){
-            throw new Exception('parent is empty');
-        }
-        if(!is_string($parent)){
-            throw new Exception('parent must be string');
-        }
         $this->parent = $parent;
     }
 
@@ -366,9 +353,6 @@ class Url
     public static function isUrl(string $url)
     {
         $url = parse_url($url);
-        if(!is_array($url)) {
-            return false;
-        }
         if (!array_key_exists('host', $url)) {
             return false;
         }
@@ -383,13 +367,12 @@ class Url
     {
         $parseHomeAddress = parse_url($this->getHomeAddress());
         $parseUrl = parse_url($this->getParent());
-        if(is_array($parseUrl) && is_array($parseHomeAddress)) {
-            if (array_key_exists('host', $parseHomeAddress) && array_key_exists('host', $parseUrl)) {
-                if (strpos($parseHomeAddress['host'], $parseUrl['host']) !== false) {
-                    return true;
-                }
+        if (array_key_exists('host', $parseHomeAddress) && array_key_exists('host', $parseUrl)) {
+            if (strpos($parseHomeAddress['host'], $parseUrl['host']) !== false) {
+                return true;
             }
         }
+
         return false;
     }
 
@@ -414,11 +397,9 @@ class Url
     {
         $parseHomeAddress = parse_url($this->getHomeAddress());
         $parseUrl = parse_url($this->getUrl());
-        if(is_array($parseUrl) && is_array($parseHomeAddress)) {
-            if (array_key_exists('host', $parseHomeAddress) && array_key_exists('host', $parseUrl)) {
-                if (strpos($parseHomeAddress['host'], $parseUrl['host']) !== false) {
-                    return true;
-                }
+        if (array_key_exists('host', $parseHomeAddress) && array_key_exists('host', $parseUrl)) {
+            if (strpos($parseHomeAddress['host'], $parseUrl['host']) !== false) {
+                return true;
             }
         }
         return false;
@@ -473,9 +454,6 @@ class Url
      */
     public function setAnchorText(string $anchorText)
     {
-        if(!is_string($anchorText)){
-            throw new Exception('anchor text must string');
-        }
         $this->anchorText = $anchorText;
     }
 
@@ -485,9 +463,6 @@ class Url
      */
     public function setFabricUrl(string $fabricUrl)
     {
-        if(!is_string($fabricUrl)) {
-            throw new Exception('Real url link must string');
-        }
         $this->fabricUrl = $fabricUrl;
     }
 
@@ -497,9 +472,6 @@ class Url
      */
     public function setDepth(int $depth)
     {
-        if(!is_int($depth)) {
-            throw new Exception('Depth must int');
-        }
         $this->depth = $depth;
     }
 
@@ -600,9 +572,6 @@ class Url
      */
     public static function convertToUTF8(string $string)
     {
-        if(!is_string($string)  ) {
-            throw new Exception('string must be string');
-        }
        return iconv('UTF-8', 'UTF-8//IGNORE',$string);
     }
 
@@ -622,7 +591,7 @@ class Url
     }
 
     /**
-     * @return string
+     * @return bool|string|null
      */
     public function getHomeAddressExternalLink()
     {
@@ -635,7 +604,7 @@ class Url
      */
     public function setHomeAddressExternalLink($homeAddressExternalLink)
     {
-        if(!(is_string($homeAddressExternalLink) OR is_NULL($homeAddressExternalLink) OR is_bool($homeAddressExternalLink)  )){
+        if(!(is_string($homeAddressExternalLink) OR is_NULL($homeAddressExternalLink) )){
             throw new Exception('Home address external link must string or NULL or bool');
         }
         if(is_string($homeAddressExternalLink)){
@@ -645,16 +614,15 @@ class Url
         }
     }
 
-    /**
-     * @return mixed
-     * @throws Exception
-     */
+
+
     public function getHeaders()
     {
-        $clint = SeosaziFramework::makeFreeProcessor($this->homeAddress);
-        $resource = SeosaziFramework::getHttpWithClint($clint, $this->url);
-        #var_dump($resource);
-        return $resource['headers'];
+//        $clint = SeosaziFramework::makeFreeProcessor($this->homeAddress);
+//        $resource = SeosaziFramework::getHttpWithClint($clint, $this->url);
+//        #var_dump($resource);
+        $resource = WebPageProcessor::onePageProcessed($this);
+        return $resource->getHeader();
     }
 
     /**
@@ -664,10 +632,8 @@ class Url
      */
     public static function getHomeAddressWithRedirect(string $url){
 
-        if(!is_string($url)){
-            throw new Exception('url must string');
-        }
         $url = self::correctUrl($url);
+        $result = [];
         $result['homeAddress'] = $url;
         $result['url'] = $url;
         $result['parent'] = $url;
@@ -700,9 +666,6 @@ class Url
      */
     public static function getUrlRedirect(string $url){
 
-        if(!is_string($url)){
-            throw new Exception('url must string');
-        }
         $url = self::correctUrl($url);
         $urlInfo = Url::createUrlInfoWithUrl($url);
         $headers = $urlInfo->getHeaders();
@@ -724,13 +687,12 @@ class Url
     {
         $parseUrl1 = parse_url($url1);
         $parseUrl2 = parse_url($url2);
-        if(is_array($parseUrl2) && is_array($parseUrl1)) {
-            if (array_key_exists('host', $parseUrl1) && array_key_exists('host', $parseUrl2)) {
-                if (strpos($parseUrl1['host'], $parseUrl2['host']) !== false) {
-                    return true;
-                }
+        if (array_key_exists('host', $parseUrl1) && array_key_exists('host', $parseUrl2)) {
+            if (strpos($parseUrl1['host'], $parseUrl2['host']) !== false) {
+                return true;
             }
         }
+
         return false;
     }
 

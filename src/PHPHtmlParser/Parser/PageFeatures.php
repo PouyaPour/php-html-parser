@@ -21,27 +21,16 @@ class PageFeatures
     private $url;
     private $status;
     private $header;
-    /* @var $urlInfo Url*/
     private $urlInfo;
-    /** @var int */
     private $depth;
-    /** @var array */
     private $h1Tag;
-    /** @var array */
     private $bodyText;
-    /** @var array */
     private $imageAlt;
-    /** @var string */
     private $canonical;
-    /** @var string */
     private $html;
-    /** @var string */
     private $parent;
-    /** @var array */
     private $externalLinks;
-    /** @var array */
     private $internalLinks;
-    /** @var array */
     private $links;
     private $urlBeforeRedirect;
     private $redirect;
@@ -103,20 +92,14 @@ class PageFeatures
         return $processPage;
     }
 
-    /**
-     * @return string
-     * @throws Exception
-     */
+
     public function getTitle()
     {
-        if($this->title === null){
-            throw new Exception('Title is not selected.');
-        }
         return $this->title;
     }
 
     /**
-     * @param string $title
+     * @param $title
      * @throws Exception
      */
     public function setTitle($title)
@@ -141,8 +124,7 @@ class PageFeatures
     }
 
     /**
-     * @param string $canonical
-     * @throws Exception
+     * @param $canonical
      */
     public function setCanonical($canonical)
     {
@@ -161,29 +143,14 @@ class PageFeatures
 
     public function getCanonical()
     {
-        if($this->canonical === null){
-            throw new Exception('canonical is not selected.');
-        }
         return $this->canonical;
     }
 
-    /**
-     * @return string
-     * @throws Exception
-     */
     public function getDescription()
     {
-        if($this->description === null){
-            throw new Exception('Description is not selected.');
-        }
-        
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     * @throws Exception
-     */
     public function setDescription($description)
     {
         if($description === null){
@@ -205,49 +172,34 @@ class PageFeatures
         }
     }
 
-    /**
-     * @return string
-     * @throws Exception
-     */
+
     public function getUrl()
     {
-        if($this->url === null){
-            throw new Exception('Url is not selected.');
-        }
         return $this->url;
     }
 
-    /**
-     * @param string $url
-     * @throws Exception
-     */
     public function setUrl($url)
     {
         if($url === null){
-            throw new Exception('Url selected is NULL.');
-        }elseif(!is_string($url)){
-            throw new Exception('Url selected is not string.');
+            $this->url = false;
+        }elseif (is_array($url)) {
+            if (empty($url)) {
+                $this->url = false;
+            }else {
+                $this->url = $url[0]['url'];
+            }
         }else {
             $this->url = $url;
         }
     }
 
-    /**
-     * @return mixed
-     * @throws Exception
-     */
+
     public function getStatus()
     {
-        if($this->status === null){
-            throw new Exception('status is not selected.');
-        }
         return $this->status;
     }
 
-    /**
-     * @param mixed $status
-     * @throws Exception
-     */
+
     public function setStatus($status)
     {
         if($status === null){
@@ -259,22 +211,12 @@ class PageFeatures
         }
     }
 
-    /**
-     * @return mixed
-     * @throws Exception
-     */
+
     public function getHeader()
     {
-        if($this->header === null){
-            throw new Exception('header is not selected.');
-        }   
         return $this->header;
     }
 
-    /**
-     * @param mixed $header
-     * @throws Exception
-     */
     public function setHeader($header)
     {
         if($header === null){
@@ -292,22 +234,12 @@ class PageFeatures
         return Url::isHtmlPage($this->header);
     }
 
-    /**
-     * @return Url
-     * @throws Exception
-     */
+
     public function getUrlInfo()
     {
-        if($this->urlInfo === null){
-            throw new Exception('urlInfo is not selected.');
-        }
         return $this->urlInfo;
     }
 
-    /**
-     * @param mixed $urlInfo
-     * @throws Exception
-     */
     public function setUrlInfo($urlInfo)
     {
         if($urlInfo === null){
@@ -329,20 +261,13 @@ class PageFeatures
         return false;
     }
 
-    /**
-     * @return int
-     * @throws Exception
-     */
     public function getDepth()
     {
-        if($this->depth === null){
-            throw new Exception('depth is not selected.');
-        }
         return $this->depth;
     }
 
     /**
-     * @param int $depth
+     * @param $depth
      */
     public function setDepth($depth)
     {
@@ -355,18 +280,16 @@ class PageFeatures
         }
     }
 
-    /**
-     * @return array
-     */
+
     public function getH1Tag()
     {
         return $this->h1Tag;
     }
 
     /**
-     * @param array $h1Tag
+     * @param $h1Tag
      */
-    public function setH1Tag(array $h1Tag)
+    public function setH1Tag($h1Tag)
     {
         if($h1Tag === null){
             $this->h1Tag = false;
@@ -381,18 +304,16 @@ class PageFeatures
         }
     }
 
-    /**
-     * @return array
-     */
+
     public function getBodyText()
     {
         return $this->bodyText;
     }
 
     /**
-     * @param array $bodyText
+     * @param $bodyText
      */
-    public function setBodyText(array $bodyText)
+    public function setBodyText($bodyText)
     {
         if($bodyText === null){
             $this->bodyText = false;
@@ -413,18 +334,16 @@ class PageFeatures
         }
     }
 
-    /**
-     * @return array
-     */
+
     public function getImageAlt()
     {
         return $this->imageAlt;
     }
 
     /**
-     * @param array $imageAlt
+     * @param $imageAlt
      */
-    public function setImageAlt(array $imageAlt)
+    public function setImageAlt($imageAlt)
     {
         if($imageAlt === null){
             $this->imageAlt = false;
@@ -439,18 +358,15 @@ class PageFeatures
         }
     }
 
-    /**
-     * @return string
-     */
     public function getHtml()
     {
         return $this->html;
     }
 
     /**
-     * @param string $html
+     * @param $html
      */
-    public function setHtml(string $html)
+    public function setHtml($html)
     {
         $this->html = $html;
     }
@@ -464,9 +380,9 @@ class PageFeatures
     }
 
     /**
-     * @param string $parent
+     * @param $parent
      */
-    public function setParent(string $parent)
+    public function setParent($parent)
     {
         if($parent === null){
             $this->parent = '';
@@ -476,17 +392,11 @@ class PageFeatures
 
     }
 
-    /**
-     * @return array
-     */
     public function getExternalLinks()
     {
         return $this->externalLinks;
     }
 
-    /**
-     * @param array|null $externalLinks
-     */
     public function setExternalLinks($externalLinks)
     {
         if($externalLinks === null){
@@ -506,17 +416,12 @@ class PageFeatures
         }
     }
 
-    /**
-     * @return array
-     */
+
     public function getInternalLinks()
     {
         return $this->internalLinks;
     }
 
-    /**
-     * @param array $internalLinks
-     */
     public function setInternalLinks($internalLinks)
     {
         if($internalLinks === null){
@@ -536,17 +441,12 @@ class PageFeatures
         }
     }
 
-    /**
-     * @return array
-     */
     public function getLinks()
     {
         return $this->links;
     }
 
-    /**
-     * @param array $links
-     */
+
     public function setLinks($links)
     {
         if($links === null){
@@ -615,16 +515,14 @@ class PageFeatures
         }
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getBaseTag()
     {
         return $this->baseTag;
     }
 
     /**
-     * @param mixed $baseTag
+     * @param $baseTag
      */
     public function setBaseTag($baseTag)
     {
@@ -650,7 +548,7 @@ class PageFeatures
     }
 
     /**
-     * @param mixed $headerContentType
+     * @param $headerContentType
      */
     public function setHeaderContentType($headerContentType)
     {
@@ -708,9 +606,9 @@ class PageFeatures
     }
 
     /**
-     * @param array $pTag
+     * @param $pTag
      */
-    public function setPTag(array $pTag)
+    public function setPTag($pTag)
     {
         if($pTag === null){
             $this->pTag = false;
@@ -734,9 +632,9 @@ class PageFeatures
     }
 
     /**
-     * @param array $spanTag
+     * @param $spanTag
      */
-    public function setSpanTag(array $spanTag)
+    public function setSpanTag($spanTag)
     {
         if($spanTag === null){
             $this->spanTag = false;
@@ -760,9 +658,9 @@ class PageFeatures
     }
 
     /**
-     * @param array $h2Tag
+     * @param $h2Tag
      */
-    public function setH2Tag(array $h2Tag)
+    public function setH2Tag($h2Tag)
     {
         if($h2Tag === null){
             $this->h2Tag = false;
@@ -786,9 +684,9 @@ class PageFeatures
     }
 
     /**
-     * @param array $h3Tag
+     * @param $h3Tag
      */
-    public function setH3Tag(array $h3Tag)
+    public function setH3Tag($h3Tag)
     {
         if($h3Tag === null){
             $this->h3Tag = false;
@@ -812,9 +710,9 @@ class PageFeatures
     }
 
     /**
-     * @param array $h4Tag
+     * @param $h4Tag
      */
-    public function setH4Tag(array $h4Tag)
+    public function setH4Tag($h4Tag)
     {
         if($h4Tag === null){
             $this->h4Tag = false;
@@ -829,18 +727,16 @@ class PageFeatures
         }
     }
 
-    /**
-     * @return array
-     */
+
     public function getH5Tag()
     {
         return $this->h5Tag;
     }
 
     /**
-     * @param array $h5Tag
+     * @param $h5Tag
      */
-    public function setH5Tag(array $h5Tag)
+    public function setH5Tag($h5Tag)
     {
         $this->h5Tag = $h5Tag;
         if($h5Tag === null){
@@ -856,18 +752,16 @@ class PageFeatures
         }
     }
 
-    /**
-     * @return array
-     */
+
     public function getH6Tag()
     {
         return $this->h6Tag;
     }
 
     /**
-     * @param array $h6Tag
+     * @param $h6Tag
      */
-    public function setH6Tag(array $h6Tag)
+    public function setH6Tag($h6Tag)
     {
         if($h6Tag === null){
             $this->h6Tag = false;
@@ -882,18 +776,16 @@ class PageFeatures
         }
     }
 
-    /**
-     * @return array
-     */
+
     public function getLiElement()
     {
         return $this->liElement;
     }
 
     /**
-     * @param array $liElement
+     * @param $liElement
      */
-    public function setLiElement(array $liElement)
+    public function setLiElement($liElement)
     {
         if($liElement === null){
             $this->liElement = false;
@@ -908,18 +800,15 @@ class PageFeatures
         }
     }
 
-    /**
-     * @return array
-     */
     public function getAnchorTag()
     {
         return $this->anchorTag;
     }
 
     /**
-     * @param array $anchorTag
+     * @param $anchorTag
      */
-    public function setAnchorTag(array $anchorTag)
+    public function setAnchorTag($anchorTag)
     {
         if($anchorTag === null){
             $this->anchorTag = false;
@@ -934,18 +823,16 @@ class PageFeatures
         }
     }
 
-    /**
-     * @return array
-     */
+
     public function getEntireData()
     {
         return $this->entireData;
     }
 
     /**
-     * @param array $entireData
+     * @param $entireData
      */
-    public function setEntireData(array $entireData)
+    public function setEntireData($entireData)
     {
         $this->entireData = $entireData;
     }
