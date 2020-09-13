@@ -336,8 +336,6 @@ class Url
     private function isUrlCorrect()
     {
         $url = parse_url($this->url);
-        if(!is_array($url))
-            return false;
         if (!array_key_exists('host', $url))
             return false;
         return true;

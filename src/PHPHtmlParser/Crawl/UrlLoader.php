@@ -24,9 +24,6 @@ class UrlLoader
      */
     public static function initialize(string $url)
     {
-        if(!is_string($url)){
-            throw new Exception('url Must be string.');
-        }
         try {
             return new Client([
                 'base_uri' => $url,
@@ -57,9 +54,6 @@ class UrlLoader
      */
     private static function getPath(string $url)
     {
-        if(!is_string($url)){
-            throw new Exception('url Must be string.');
-        }
         $parse_url=parse_url($url);
         if (array_key_exists('path', $parse_url) and array_key_exists('query', $parse_url)){
             return $parse_url['path'] . '?' . $parse_url['query'];
@@ -77,9 +71,6 @@ class UrlLoader
      */
     private static function getHost(string $url)
     {
-        if(!is_string($url)){
-            throw new Exception('url Must be string.');
-        }
         $parse_url=parse_url($url);
         if (array_key_exists('scheme', $parse_url)){
             if(array_key_exists('host', $parse_url))
@@ -100,9 +91,6 @@ class UrlLoader
      */
     public static function getHttpWithClint(client $client, string $url)
     {
-        if (!is_string($url)) {
-            throw new Exception('url Must be string.');
-        }
         $GLOBALS['furtherInformation'] = array();
         $cookieJar = new CookieJar();
         try {
@@ -250,9 +238,6 @@ class UrlLoader
      */
     public static function getHttpWithClientNoRedirect(string $url)
     {
-        if(!is_string($url)){
-            throw new Exception('url Must be string.');
-        }
         $GLOBALS['furtherInformation']=array();
         try {
             $client= new Client([

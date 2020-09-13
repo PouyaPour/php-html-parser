@@ -43,7 +43,7 @@ class WebPageProcessor
     {
         $urlClass = Url::createUrlInfoWithUrl($urlInfo);
         if($this->getClintCrawler()) {
-            if($this->clintCrawler !== false) {
+            if(! is_bool($this->clintCrawler)) {
                 $http_url_info = UrlLoader::getHttpWithClint($this->clintCrawler, $urlInfo);
                 $html = $http_url_info['html'];
                 $status = $http_url_info['status'];
@@ -86,7 +86,6 @@ class WebPageProcessor
      */
     public static function onePageProcessed($urlInfo)
     {
-        $data=NULL;
         $data = new WebPageProcessor($urlInfo);
         $websiteHtmlDomParser=$data->pageHtmlDomParser($urlInfo);
         return $websiteHtmlDomParser->getData();
