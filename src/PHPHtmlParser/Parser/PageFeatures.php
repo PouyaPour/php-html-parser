@@ -11,7 +11,6 @@ namespace PHPHtmlParser\Parser;
 
 use Exception;
 use PHPHtmlParser\Crawl\Url;
-use Seosazi\Tools\PageReference;
 
 
 class PageFeatures

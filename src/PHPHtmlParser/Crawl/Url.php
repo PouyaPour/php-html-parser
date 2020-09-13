@@ -65,13 +65,10 @@ class Url
      * @param string $anchorText
      * @param string $fabricUrl
      * @param int $depth
-     * @param null $status
-     * @param bool $homeAddressExternalLink
      * @return Url
      * @throws Exception
      */
-    public static function createUrlInfo(string $homeAddress, string $url, string $parent, string $anchorText, string $fabricUrl, int $depth, $status=NULL,
-                                         $homeAddressExternalLink=false)
+    public static function createUrlInfo(string $homeAddress, string $url, string $parent, string $anchorText, string $fabricUrl, int $depth)
     {
         $result=array();
         $result['homeAddress'] = $homeAddress;
@@ -80,8 +77,8 @@ class Url
         $result['anchorText'] = $anchorText;
         $result['fabricUrl'] = $fabricUrl;
         $result['depth'] = $depth;
-        $result['status']=$status;
-        $result['homeAddressIsExternalLink']=$homeAddressExternalLink;
+        $result['status']=null;
+        $result['homeAddressIsExternalLink']=false;
         return new Url($result);
     }
 
@@ -789,7 +786,6 @@ class Url
      */
     public static function getHostNameWithoutScheme($url)
     {
-        $editUrl = $url;
         if(preg_match('/^http/i', $url)){
             $editUrl = $url;
         }else{

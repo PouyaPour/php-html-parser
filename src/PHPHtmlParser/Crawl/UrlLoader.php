@@ -14,8 +14,6 @@ use GuzzleHttp\Cookie\SetCookie;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\TransferStats;
 use PHPHtmlParser\Utility\Tools;
-use Psr\Http\Message\RequestInterface;
-use Zend\Json\Exception\RecursionException;
 
 class UrlLoader
 {
@@ -147,6 +145,7 @@ class UrlLoader
                 }
                 $counter++;
             } while ($crawler->getStatusCode() >= 300 AND $crawler->getStatusCode() < 400 AND $counter < 10);
+            $data = [];
             $data['error'] = false;
             $data['history'] = '';
             $data['furtherInformation'] = $GLOBALS['furtherInformation'];
@@ -255,7 +254,6 @@ class UrlLoader
             throw new Exception('url Must be string.');
         }
         $GLOBALS['furtherInformation']=array();
-        $client=NULL;
         try {
             $client= new Client([
                 'base_uri' => self::getHost($url),
@@ -268,6 +266,7 @@ class UrlLoader
                         $GLOBALS['furtherInformation'] = $stats->getHandlerStats();
                     }
             ]);
+            $data=[];
             $data['error']=false;
             $data['history']='';
             $data['furtherInformation']=$GLOBALS['furtherInformation'];

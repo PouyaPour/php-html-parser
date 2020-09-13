@@ -8,7 +8,6 @@
 
 namespace PHPHtmlParser\Parser;
 use PHPHtmlParser\Crawl\Url;
-use voku\helper\HtmlDomParser;
 
 define('MAX_FILE_SIZE', 6000000);
 class HtmlParser
@@ -378,7 +377,7 @@ class HtmlParser
         if (0 !== strpos($href, 'http')) {
             if (array_key_exists('path', parse_url($href))) {
                 $href = parse_url($href)['path'];
-               
+
                 if (array_key_exists('query', parse_url($originalHref))) {
                     $href .= '?' . parse_url($originalHref)['query'];
                 }

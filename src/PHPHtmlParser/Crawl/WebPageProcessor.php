@@ -33,28 +33,6 @@ class WebPageProcessor
         $this->clintCrawler=UrlLoader::initialize($this->websiteUrl);
     }
 
-
-    /**
-     * @param Url $urlInfo
-     * @return mixed
-     * @throws \Exception
-     */
-    private static function getAllUrlInAddress(Url $urlInfo)
-    {
-        if($urlInfo->isCorrectForCrawl()) {
-            $data = NULL;
-            if ($urlInfo->isUrlExternalLink()) {
-                $data = new WebPageProcessor($urlInfo->getHomeAddressExternalLink());
-            } else {
-                $data = new WebPageProcessor($urlInfo->getHomeAddress());
-            }
-            $final = $data->pageHtmlDomParser($urlInfo);
-            return $final->getLinks();
-        }
-        return false;
-    }
-
-
     /**
      * @param $urlInfo Url
      * @return null|HtmlParser
@@ -65,15 +43,19 @@ class WebPageProcessor
     {
         $urlClass = Url::createUrlInfoWithUrl($urlInfo);
         if($this->getClintCrawler()) {
-            $http_url_info = UrlLoader::getHttpWithClint($this->clintCrawler, $urlInfo);
-            $html = $http_url_info['html'];
-            $status = $http_url_info['status'];
-            $headers = $http_url_info['headers'];
-            $text = $http_url_info['text'];
-            $furtherInformation = $http_url_info['furtherInformation'];
-            $redirect = $http_url_info['redirect'];
-            return new HtmlParser($html, $status, $headers, $text,
-                $furtherInformation, $urlClass, null, $redirect);
+            if($this->clintCrawler !== false) {
+                $http_url_info = UrlLoader::getHttpWithClint($this->clintCrawler, $urlInfo);
+                $html = $http_url_info['html'];
+                $status = $http_url_info['status'];
+                $headers = $http_url_info['headers'];
+                $text = $http_url_info['text'];
+                $furtherInformation = $http_url_info['furtherInformation'];
+                $redirect = $http_url_info['redirect'];
+                return new HtmlParser($html, $status, $headers, $text,
+                        $furtherInformation, $urlClass, null, $redirect);
+            } else {
+                return $this->zeroPageDomParser($urlClass);
+            }
         }else{
             return $this->zeroPageDomParser($urlClass);
         }
@@ -107,23 +89,6 @@ class WebPageProcessor
         $data=NULL;
         $data = new WebPageProcessor($urlInfo);
         $websiteHtmlDomParser=$data->pageHtmlDomParser($urlInfo);
-        return $websiteHtmlDomParser->getData();
-    }
-
-    /**
-     * @param Url $urlInfo
-     * @return array
-     * @throws \Exception
-     */
-    private static function createZeroPage(Url $urlInfo)
-    {
-        $data=NULL;
-        if($urlInfo->isUrlExternalLink()){
-            $data=new WebPageProcessor($urlInfo->getHomeAddressExternalLink());
-        }else {
-            $data = new WebPageProcessor($urlInfo->getHomeAddress());
-        }
-        $websiteHtmlDomParser=$data->zeroPageDomParser($urlInfo);
         return $websiteHtmlDomParser->getData();
     }
 
