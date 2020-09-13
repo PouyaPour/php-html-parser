@@ -10,6 +10,7 @@ namespace PHPHtmlParser\Parser;
 use PHPHtmlParser\Crawl\Url;
 use voku\helper\HtmlDomParser;
 
+
 define('MAX_FILE_SIZE', 6000000);
 class HtmlParser
 {
