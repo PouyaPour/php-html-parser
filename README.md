@@ -8,7 +8,7 @@ Let's get started ...
 ## Installing PHP Html Parser
 
 This package can be found on packagist and is best loaded using composer. We support php 5.0, 7.0.
-The recommended way to install Guzzle is through [Composer](https://getcomposer.org/).
+The recommended way to install Php-Html-Parser is through [Composer](https://getcomposer.org/).
 
 **composer.phar**
 ```
