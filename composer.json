@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": ">=7.2.0",
-        "guzzlehttp/guzzle": "~7.0",
+        "guzzlehttp/guzzle": "^7.0.1",
         "danielstjules/stringy": "~3.0.1",
         "voku/simple_html_dom": "^4.7"
     },
