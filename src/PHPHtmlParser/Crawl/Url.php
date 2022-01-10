@@ -599,7 +599,7 @@ class Url
      */
     public function setHomeAddressExternalLink($homeAddressExternalLink)
     {
-        if(!(is_string($homeAddressExternalLink) OR is_NULL($homeAddressExternalLink) )){
+        if(!(is_string($homeAddressExternalLink) OR is_NULL($homeAddressExternalLink) OR is_bool($homeAddressExternalLink) )){
             throw new Exception('Home address external link must string or NULL or bool');
         }
         if(is_string($homeAddressExternalLink)){

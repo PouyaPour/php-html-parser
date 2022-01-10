@@ -154,17 +154,17 @@ class UrlLoader
 
     private static function getHtml(\Psr\Http\Message\ResponseInterface $crawler)
     {
-        $html = '<html></html>';
-        if (Url::isHtmlPage($crawler->getHeaders())) {
-            $html = $crawler->getBody()->getContents();
-            if(strlen($html)> 1024 * 1024){
-                throw  new Exception(
-                        'over size 1024 * 1024'
-                );
-            }
+        $html = $crawler->getBody()->getContents();
+
+        if(strlen($html)> 1024 * 1024){
+            throw  new Exception(
+                    'over size 1024 * 1024'
+            );
         }
+
         if (empty($html))
             $html = '<html></html>';
+
         return $html;
     }
 

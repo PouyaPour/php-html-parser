@@ -136,7 +136,7 @@ class HtmlParser
     {
         if(!is_bool($this->HtmlDomParser)) {
             foreach ($this->HtmlDomParser->find('base') as $e) {
-                if($e->parent->tag ===strtolower('head')){
+                if(isset($e->parent) and $e->parent->tag === strtolower('head')){
                     $this->baseTag = $e->getAttribute('href');
                     return $e->getAttribute('href');
                 }
