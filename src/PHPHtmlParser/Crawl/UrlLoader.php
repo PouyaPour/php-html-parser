@@ -156,9 +156,9 @@ class UrlLoader
     {
         $html = $crawler->getBody()->getContents();
 
-        if(strlen($html)> 1024 * 1024){
+        if(strlen($html)> 1024 * 1024 * 1024){
             throw  new Exception(
-                    'over size 1024 * 1024'
+                    'over size 1024 * 1024 * 1024'
             );
         }
 
